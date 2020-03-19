@@ -24,3 +24,10 @@ $ java MainProgram
 **Main Screen:**
 This is the main screen where user will have two options. Login as a user or as an agent.
 ![Screen Shot 2020-03-18 at 10 17 43 PM](https://github.uconn.edu/storage/user/3220/files/9ecc6f00-6966-11ea-9a15-4a0a8d258b8c)
+
+**Login Page for Agent:**
+If user picked option 2. It will redirect to this page where Travel Agent needs to input their AgentID and password. If password is incorrect it will ask the agent to re-enter the password. (id and password are the same. Not very practical in the real world but it is for demo.)
+![Screen Shot 2020-03-18 at 10 39 40 PM](https://github.uconn.edu/storage/user/3220/files/6712f680-6969-11ea-97d0-185af728a0d2)
+
+Once the Travel Agent login successfully. They will have some options that are available:
+![Screen Shot 2020-03-18 at 10 40 54 PM](https://github.uconn.edu/storage/user/3220/files/8e69c380-6969-11ea-9128-b8defefbddad)
