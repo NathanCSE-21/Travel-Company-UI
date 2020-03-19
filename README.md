@@ -6,7 +6,9 @@ Each users will have different options available to them.
 **Installation:**
 
 $ git clone https://github.com/NathanCSE-21/Travel-Company-UI.git
+
 $ cd Travel-Company-UI
+
 Two options you can compile MainProgram or use it without compiling.
 
 **Without compiling:**
