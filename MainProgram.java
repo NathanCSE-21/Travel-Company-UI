@@ -72,6 +72,9 @@ public class MainProgram {
                     String agentfilename = "agent" + username;
                     TravProf newProfile;
 
+                    // New object of TravProfDb
+                    TravProfDB data = new TravProfDB(agentfilename);
+
                     // Loop through to allow agent picking options
                     // until they decided to stop. (Option 7)
                     while(agentOption) {
@@ -141,17 +144,21 @@ public class MainProgram {
 
                                 clean();
                                 // Print to test it out
-                                System.out.println("agentID: " + newProfile.ID);
-                                System.out.println("firstName: " + newProfile.firstName);
-                                System.out.println("lastName: " + newProfile.lastName);
-                                System.out.println("address: " + newProfile.address);
-                                System.out.println("phone: " + newProfile.phone);
-                                System.out.println("cost: " + newProfile.tripCost);
-                                System.out.println("paymentType: " + newProfile.paymentType);
-                                System.out.println("travelType: " + newProfile.travelType);
+                                TravProf.gettravAgentID();
+                                TravProf.getFirstName();
+                                TravProf.getLastName();
+                                TravProf.getAddress();
+                                TravProf.getPhone();
+                                TravProf.getTripCost();
+                                TravProf.getpaymentType();
+                                TravProf.getTravelType();
+
                                 System.out.println("Is this information correct? Y/N");
                                 Scanner correctobj = new Scanner(System.in);
                                 String isCorrect = correctobj.nextLine();
+
+                                // Put the Travprof object into TravProfDB
+                                data.insertNewProfile(newProfile);
 
                                 // If the information entered is correct we exit this loop.
                                 if(isCorrect.equals("Y")){
@@ -180,36 +187,13 @@ public class MainProgram {
                         else if (selection.equals("5")) {
                             clean();
                             System.out.println("Please wait ...");
+                            data.initializeDataBase(false);
 
-
-                            boolean exists = new File("/src/" + agentfilename).isFile();
-
-
-                            // Pull data from agent file name.
-                            ArrayList<TravProf> profile = new ArrayList<>();
-                            try {
-                                FileInputStream fis = new FileInputStream(agentfilename);
-                                ObjectInputStream ois = new ObjectInputStream(fis);
-                                profile = (ArrayList) ois.readObject();
-
-                                ois.close();
-                                fis.close();
-
-                            }
-                            catch (IOException ioe) {
-                                System.out.println("File for this agent is not found. Please create a new profile first.");
-                            }
-                            catch (ClassNotFoundException c) {
-                                System.out.println("Class not found");
-                                c.printStackTrace();
-                                return;
-                            }
 
                             // Print out list of profiles.
-                            for (TravProf prof : profile) {
-                                System.out.println(prof);
+                            for (TravProf profile : data.travelerList) {
+                                System.out.println(profile);
                             }
-
 
                             // Enter any thing to go back.
                             goback();
@@ -222,63 +206,10 @@ public class MainProgram {
                             clean();
                             System.out.println("Please wait ...");
 
+                            data.writeAllTravProf();
 
+                            goback();
 
-                            // If exists proceed to save it into database.
-
-                            ArrayList<TravProf> profile = new ArrayList<>();
-                            boolean exception = false;
-                            try {
-                                // Pull object from file.
-                                FileInputStream fis = new FileInputStream(agentfilename);
-                                ObjectInputStream ois = new ObjectInputStream(fis);
-
-                                profile = (ArrayList) ois.readObject();
-
-                                ois.close();
-                                fis.close();
-
-
-                            } catch (IOException ioe) {
-                                // System.out.println("File is not found!");
-
-                                // add new object into profile.
-                                profile.add(new TravProf(username, firstName, lastName, address, phone, cost, paymentType, travelType));
-
-                                // push new data into agent name file.
-
-                                FileOutputStream fos = new FileOutputStream(agentfilename);
-                                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                                oos.writeObject(profile);
-
-                                oos.close();
-                                fos.close();
-
-                                exception = true;
-
-                            } catch (ClassNotFoundException c) {
-                                System.out.println("Class not found");
-                                c.printStackTrace();
-                                return;
-                            }
-
-                            // If exception is false , this mean that
-                            // the file exists and didn't get create in the above step.
-                            if(exception == false) {
-                                // Add new TravProf into profile.
-                                profile.add(new TravProf(username, firstName, lastName, address, phone, cost, paymentType, travelType));
-
-
-                                // Push into the file.
-                                FileOutputStream fos = new FileOutputStream(agentfilename);
-                                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                                oos.writeObject(profile);
-
-                                oos.close();
-                                fos.close();
-                                System.out.println("Success");
-                                goback();
-                            }
 
                         }
 
