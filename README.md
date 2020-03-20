@@ -27,6 +27,7 @@ This is the main screen where user will have two options. Login as a user or as 
 
 **Agent :**
 If user picked option 2. It will redirect to this page where Travel Agent needs to input their AgentID and password. If password is incorrect it will ask the agent to re-enter the password. (id and password are the same. Not very practical in the real world but it is for demo.)
+
 ![Screen Shot 2020-03-18 at 10 39 40 PM](https://github.uconn.edu/storage/user/3220/files/6712f680-6969-11ea-97d0-185af728a0d2)
 
 Once the Travel Agent login successfully. They will have some options that are available:
