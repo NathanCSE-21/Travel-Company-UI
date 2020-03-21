@@ -15,19 +15,19 @@ public class MedCond {
     }
 
     static void getMdContact() {
-        System.out.println("Med Contact: " + mdContact);
+        System.out.println("MdContact: " + mdContact);
     }
 
     static void getMdPhone() {
-        System.out.println("Med Phone: " + mdPhone);
+        System.out.println("MdPhone: " + mdPhone);
     }
 
     static void getAlgType() {
-        System.out.println("Allergy Type: " + algType);
+        System.out.println("AlgType: " + algType);
     }
 
     static void getIllType() {
-        System.out.println("Illness Type: " + illType);
+        System.out.println("IllType: " + illType);
     }
 
     static void updateMdContact(String mdcontact) {
