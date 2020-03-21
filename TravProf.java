@@ -9,10 +9,11 @@ public class TravProf implements Serializable{
     static float tripCost;
     static String travelType;
     static String paymentType;
+    static MedCond medCond;
 
     // Constructor with parameters.
     // Note: this keyword is self in Python.
-    public TravProf(String ID, String firstName, String lastName, String address, String phone, float tripCost, String paymentType, String travelType){
+    public TravProf(String ID, String firstName, String lastName, String address, String phone, float tripCost, String paymentType, String travelType, MedCond medCond){
         super();
         this.ID = ID;
         this.firstName = firstName;
@@ -22,6 +23,7 @@ public class TravProf implements Serializable{
         this.tripCost = tripCost;
         this.travelType = travelType;
         this.paymentType = paymentType;
+        this.medCond = medCond;
     }
 
     @Override
@@ -65,9 +67,15 @@ public class TravProf implements Serializable{
 
 
     // To be implement getMedCondInfo()
+    static void getMedCondInfo() {
+        System.out.println("medCond: " + medCond);
+    }
+
 
     // To be implement updateMedCondInfo(MedCond)
-
+    static void updateMedCondInfo(MedCond medcond) {
+        medCond = medcond;
+    }
 
 
     static void updateFirstName(String firstname){
@@ -97,7 +105,5 @@ public class TravProf implements Serializable{
     static void updatePaymentType(String Payment){
         paymentType = Payment;
     }
-
-
 
 }
