@@ -3,29 +3,81 @@ import java.io.*;
 
 public class TravProfDB implements Serializable{
     static String filename;
-    static ArrayList<TravProf> travelerList = new ArrayList<TravProf>();
+    static ArrayList<String> travelerList = new ArrayList<>();
+    static int numTravelers;
+    static int currentTravelerIndex=0;
+    static ArrayList <String> profile = new ArrayList<>();
 
     public TravProfDB(String filename){
         this.filename = filename;
     }
 
     public void insertNewProfile(TravProf newprofile){
-        this.travelerList.add(newprofile);
+        this.travelerList.add("Profile: [agentID: " + newprofile.ID +
+                " , firstName: " + newprofile.firstName +
+                ", lastName: " + newprofile.lastName +
+                ", address: " + newprofile.address +
+                ", phone: " + newprofile.phone +
+                ", tripCost: " + newprofile.tripCost +
+                ", travelType: " + newprofile.travelType +
+                ", paymentType: " + newprofile.paymentType +
+                ", Medical Contact: " + newprofile.medCond.mdContact +
+                ", Medical phone: "+ newprofile.medCond.mdPhone +
+                ", allergyType: " + newprofile.medCond.algType +
+                ", illness Type: " + newprofile.medCond.illType +"]");
+
+
     }
 
-    static void deleteProfile(String agentID, String LastName){
+    static String deleteProfile(String agentID, String LastName){
+            String profile = findFirstProfile();
+            int index = profile.indexOf(LastName);
+            if(index >=0){
+                travelerList.remove(currentTravelerIndex);
+                return "Success";
+            }
+            while(currentTravelerIndex <= numTravelers){
+                profile = findNextProfile();
+                index = profile.indexOf(LastName);
+                if(index >= 0){
+                    travelerList.remove(currentTravelerIndex);
+                    return "Success";
+                }
+            }
+
+            return "Profile not found!";
+    }
+
+    static String findProfile(String agentID , String LastName){
+        String profile = findFirstProfile();
+        int index = profile.indexOf(LastName);
+        if(index>=0){
+            return profile;
+        }
+
+        while(currentTravelerIndex <= numTravelers){
+            profile = findNextProfile();
+            //System.out.println(profile);
+            index = profile.indexOf(LastName);
+            if(index >= 0){
+                return profile;
+            }
+        }
+
+        String notFound = "Profile not found!";
+        return notFound;
+    }
+
+    static String findFirstProfile(){
+        initializeDataBase();
+        currentTravelerIndex =0;
+        return profile.get(currentTravelerIndex);
 
     }
 
-    static void findProfile(String agentID , String LastName){
-
-    }
-
-    static void findFirstProfile(){
-
-    }
-
-    static void fineNextProfile(){
+    static String findNextProfile(){
+        currentTravelerIndex++;
+        return profile.get(currentTravelerIndex);
 
     }
 
@@ -35,9 +87,9 @@ public class TravProfDB implements Serializable{
         // Try to pull data from filename
         // If filename exists push profile on it
         // If not create new one and push on it.
-        ArrayList <TravProf> newprofile = new ArrayList<>();
-        boolean exception = false;
 
+        boolean exception = false;
+        ArrayList <TravProf> newprofile = new ArrayList<>();
         // Pull object from file
         try{
             FileInputStream fis = new FileInputStream(filename);
@@ -47,6 +99,8 @@ public class TravProfDB implements Serializable{
 
             ois.close();
             fis.close();
+
+
         } catch(IOException ioe){
             // IF you can't pull object then file does not exists
             // So you push and create a new profile.
@@ -57,6 +111,9 @@ public class TravProfDB implements Serializable{
 
             oos.writeObject(travelerList);
             exception = true;
+
+            System.out.println("Success");
+
         }catch(ClassNotFoundException c){
             System.out.println("Class not found");
             return;
@@ -71,16 +128,21 @@ public class TravProfDB implements Serializable{
 
             oos.close();
             fos.close();
+
+            System.out.println("Success");
         }
     }
 
     // Pull data from filename.
-    public void initializeDataBase(){
+    static void initializeDataBase(){
+        numTravelers = travelerList.size();
+        currentTravelerIndex = numTravelers;
+
         try{
             FileInputStream fis = new FileInputStream(filename);
             ObjectInputStream ois = new ObjectInputStream(fis);
 
-            travelerList = (ArrayList) ois.readObject();
+            profile = (ArrayList<String>) ois.readObject();
 
             ois.close();
             fis.close();
@@ -96,9 +158,9 @@ public class TravProfDB implements Serializable{
             return;
         }
 
-        for(TravProf profile: travelerList){
-            System.out.println(profile);
-        }
+        //for(String prof: profile){
+        //    System.out.println(prof);
+        //}
 
 
     }
