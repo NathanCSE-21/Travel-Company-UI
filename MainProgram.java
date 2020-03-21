@@ -72,6 +72,13 @@ public class MainProgram {
                     String agentfilename = "agent" + username;
                     TravProf newProfile;
 
+                    MedCond medCond;
+                    String mdContact;
+                    String mdPhone;
+                    String algType;
+                    String illType;
+                    String medCheck;
+
                     // New object of TravProfDb
                     TravProfDB data = new TravProfDB(agentfilename);
 
@@ -104,6 +111,12 @@ public class MainProgram {
                                 cost = 0;
                                 paymentType = "";
                                 travelType = "";
+                                
+                                mdContact = "";
+                                mdPhone = "";
+                                algType = "";
+                                illType = "";
+                                medCheck = "";
 
                                 System.out.println("Please enter the following information:");
                                 System.out.print("First Name: ");
@@ -135,12 +148,34 @@ public class MainProgram {
                                 Scanner travelTypeobj = new Scanner(System.in);
                                 travelType += travelTypeobj.nextLine();
 
+                                System.out.println("Do you want to enter your medical information? Y/N");
+                                Scanner medobj = new Scanner(System.in);
 
-                                // Victor Todo
-                                // MedCond
+                                if(medobj.nextLine().equals("Y")) {
+                                    
+                                    System.out.print("Medical Contact: ");
+                                    Scanner mdcontact = new Scanner(System.in);
+                                    mdContact += mdcontact.nextLine();
 
+                                    System.out.print("Medical Phone Number: ");
+                                    Scanner mdphone = new Scanner(System.in);
+                                    mdPhone += mdphone.nextLine();
 
-                                newProfile = new TravProf(username, firstName, lastName, address, phone, cost, paymentType, travelType);
+                                    System.out.print("Allergy Type: ");
+                                    Scanner algtype = new Scanner(System.in);
+                                    algType += algtype.nextLine();
+
+                                    System.out.print("Illness Type: ");
+                                    Scanner illtype = new Scanner(System.in);
+                                    illType += illtype.nextLine();
+
+                                    medCheck += "Y";
+
+                                }
+
+                                medCond = new MedCond(mdContact, mdPhone, algType, illType);
+
+                                newProfile = new TravProf(username, firstName, lastName, address, phone, cost, paymentType, travelType, medCond);
 
                                 clean();
                                 // Print to test it out
@@ -152,6 +187,15 @@ public class MainProgram {
                                 TravProf.getTripCost();
                                 TravProf.getpaymentType();
                                 TravProf.getTravelType();
+
+                                if(medCheck.equals("Y")) {
+
+                                    MedCond.getMdContact();
+                                    MedCond.getMdPhone();
+                                    MedCond.getAlgType();
+                                    MedCond.getIllType();
+
+                                }
 
                                 System.out.println("Is this information correct? Y/N");
                                 Scanner correctobj = new Scanner(System.in);
@@ -187,7 +231,7 @@ public class MainProgram {
                         else if (selection.equals("5")) {
                             clean();
                             System.out.println("Please wait ...");
-                            data.initializeDataBase(false);
+                            data.initializeDataBase();
 
 
                             // Print out list of profiles.
