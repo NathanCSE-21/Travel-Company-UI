@@ -43,6 +43,7 @@ $ javac TravProfInterjace.java
 
 
 If the information you entered is correct pick Y. If not pick N. For the Demo I chose N and re-enter information with Medical Information this time: 
+
 ![image](https://github.uconn.edu/storage/user/3220/files/5b625100-6c43-11ea-88fd-df622810c767)
 
 
@@ -52,6 +53,7 @@ This will allow the program to easily update information/modify if you pick opti
 
 
 5. Now the information is created but hasn't been saved thus if you pick option 5. To display all the profile it will tell you file does not exist: 
+
 ![image](https://github.uconn.edu/storage/user/3220/files/6d43f400-6c43-11ea-8b31-c40fdeca493d)
 
 
@@ -68,6 +70,7 @@ This will allow the program to easily update information/modify if you pick opti
 
 
 8. You can also choose to update the profile using option 2. It takes firstname and lastname as input and will give you a range of options for you to update: 
+
 ![image](https://github.uconn.edu/storage/user/3220/files/b300bc80-6c43-11ea-8759-3364c782bfed)
 
 In this example let’s update the address and Phone:
@@ -75,14 +78,17 @@ In this example let’s update the address and Phone:
 ![image](https://github.uconn.edu/storage/user/3220/files/c01dab80-6c43-11ea-9dc4-3beacbc7254b)
 
 9. There is also a delete profile option. It allows you to delete a profile given a last name: 
+
 ![image](https://github.uconn.edu/storage/user/3220/files/1854ad80-6c44-11ea-9857-2f8564988b6e)
 
 
 Note: you might tempt to check again using option 5 to display the profile and it will still be there: 
+
 ![image](https://github.uconn.edu/storage/user/3220/files/f6f3c180-6c43-11ea-9002-afb0d105ef5c)
 
 This is because you need to save it (option 6) before displaying that profile again( option 5).
 Now after you delete it will show nothing: 
+
 ![image](https://github.uconn.edu/storage/user/3220/files/260a3300-6c44-11ea-85ea-178e2c41cad0)
 
 
